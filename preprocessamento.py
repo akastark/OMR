@@ -8,9 +8,7 @@ import cv2
 import numpy as np
 
 
-def PreProcessamento(imagem, largura, altura):
-    # redimensiona a imagem
-    imagem = cv2.resize(imagem, (largura, altura))
+def PreProcessamento(imagem):
 
     # tranforma a imagem em escala de cinza
     img_gray = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
