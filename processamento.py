@@ -1,3 +1,7 @@
+#########################################################
+#  ARQUIVO COM O CODIGO DE PROCESSAMENTO DAS QUESTOES   #
+#########################################################
+
 import cv2
 import numpy as np
 import preprocessamento as pre
