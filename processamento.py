@@ -73,3 +73,35 @@ def divideBlocoPorQuestao(imagem):
         for alternativa in colunas:
             questoes.append(alternativa)
     return questoes
+
+
+# Processa as questões e salva num vetor a resposta equivalente
+# A=0, B=1 ....
+def processaQuestoes(retangulo):
+    pixels = np.zeros((25, 5))
+    coluna = 0  # alternativa
+    linha = 0  # questao
+
+    for questao in retangulo:
+
+        # conta o numero de pixels não nulos no corte da alternativa
+        total_pixels = cv2.countNonZero(questao)
+        pixels[linha][coluna] = total_pixels
+
+        coluna += 1
+        if coluna == 5:
+            linha += 1
+            coluna = 0
+
+    # vetor de respostas
+    respostas = []
+
+    for x in range(0, 25):
+        aux = pixels[x]
+
+        # alternativa assinalada é a alternativa com mais pixels não nulos
+        alternativa_assinalada = np.where(aux == np.amax(aux))
+
+        respostas.append(alternativa_assinalada[0][0])
+
+    return respostas
