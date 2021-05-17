@@ -1,5 +1,7 @@
 import cv2
 import numpy as np
+import preprocessamento as pre
+import processamento as proc
 
 
 def reordena(pontos):
@@ -110,5 +112,72 @@ def processaQuestoes(retangulo):
             alternativa_assinalada = -1
 
         respostas.append(alternativa_assinalada[0][0])
+
+    return respostas
+
+
+# processa o retangulo fazendo a leitura das questoes
+def processaRetantagulo(retangulo, imagem_original, largura, altura):
+
+    if retangulo.size != 0:
+
+        # reordena os pontos do retangulo
+        retangulo = proc.reordena(retangulo)
+
+        # pontos da matriz de transformação para  o retangulo
+        pt1 = np.float32(retangulo)
+        pt2 = np.float32(
+            [[0, 0], [largura, 0], [0, altura], [largura, altura]])
+
+        # cria matriz de transformação do retangulo esquerdo
+        matriz = cv2.getPerspectiveTransform(pt1, pt2)
+
+        # aplica transformacao nos retangulos
+        retangulo_warp = cv2.warpPerspective(
+            imagem_original, matriz, (largura, altura))
+
+        # APLICA O THRESHOLD
+        retangulo_warp_gray = cv2.cvtColor(
+            retangulo_warp, cv2.COLOR_BGR2GRAY)
+
+        retangulo_thresh = cv2.threshold(
+            retangulo_warp_gray, 150, 255, cv2.THRESH_BINARY_INV)[1]
+
+        questoes = divideBlocoPorQuestao(retangulo_thresh)
+
+        return questoes
+
+
+# processa a imagem e faz a leitura das alternativas salvando em um vetor
+def geraVetorResposta(imagem):
+
+    largura = 800
+    altura = 1200
+
+    imagem = cv2.resize(imagem, (largura, altura))
+
+    imagem_processada = pre.preProcessamento(imagem)
+
+    # procura os contornos na imagem
+    contornos, hierarquia = cv2.findContours(
+        imagem_processada, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+
+    # procura retangulo
+    retangulos = proc.localizaRetangulos(contornos)
+
+    retangulo_esquerdo = localizaVertices(retangulos[0])  # questoes 1 a 25
+    retangulo_direito = localizaVertices(retangulos[1])  # questoes 26 a 50
+
+    # questoes do lado esquerdo
+    questoes_esquerdo = processaRetantagulo(
+        retangulo_esquerdo, imagem, largura, altura)
+
+    # questos do lado direito
+    questoes_direito = processaRetantagulo(
+        retangulo_direito, imagem, largura, altura)
+
+    # concatena os dois retangulos de respostas
+    respostas = processaQuestoes(
+        questoes_esquerdo) + processaQuestoes(questoes_direito)
 
     return respostas
