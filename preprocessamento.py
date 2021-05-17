@@ -8,12 +8,12 @@ import cv2
 import numpy as np
 
 
-def PreProcessamento(imagem):
+def preProcessamento(imagem):
 
     # tranforma a imagem em escala de cinza
     img_gray = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
 
-    # aplica gaussian blur
+    # aplica gaussian blur para reduzir ruido
     img_blur = cv2.GaussianBlur(img_gray, (5, 5), 1)
 
     # detecao de contorno com algoritmo de Canny
