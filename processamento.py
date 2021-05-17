@@ -99,8 +99,15 @@ def processaQuestoes(retangulo):
     for x in range(0, 25):
         aux = pixels[x]
 
-        # alternativa assinalada é a alternativa com mais pixels não nulos
-        alternativa_assinalada = np.where(aux == np.amax(aux))
+        # verifica se questao possui alternativa assinalada
+        # caso a qtde de pixels nao nulos seja menor que 1200 nao possui alternativa assinalada
+        if(np.amax(aux) > 1200):
+
+            # alternativa assinalada é a alternativa com mais pixels não nulos
+            alternativa_assinalada = np.where(aux == np.amax(aux))
+
+        else:
+            alternativa_assinalada = -1
 
         respostas.append(alternativa_assinalada[0][0])
 
