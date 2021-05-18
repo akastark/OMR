@@ -107,13 +107,15 @@ def processaQuestoes(retangulo):
 
         # verifica se questao possui alternativa assinalada
         # caso a qtde de pixels nao nulos seja menor que 1200 nao possui alternativa assinalada
-        if(np.amax(aux) > 1200):
+        limite_minimo = np.amin(aux)*1.5
+        if(np.amax(aux) > limite_minimo):
 
+            # print(np.amin(aux))
             # alternativa assinalada é a alternativa com mais pixels não nulos
             alternativa_assinalada = np.where(aux == np.amax(aux))
 
         else:
-            alternativa_assinalada = -1
+            alternativa_assinalada[0][0] = -1
 
         respostas.append(alternativa_assinalada[0][0])
 
@@ -164,7 +166,7 @@ def geraVetorResposta(imagem):
 
     # procura os contornos na imagem
     contornos, hierarquia = cv2.findContours(
-        imagem_processada, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+        imagem_processada, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
     # procura retangulo
     retangulos = proc.localizaRetangulos(contornos)
@@ -184,4 +186,5 @@ def geraVetorResposta(imagem):
     respostas = processaQuestoes(
         questoes_esquerdo) + processaQuestoes(questoes_direito)
 
+    print(respostas)
     return respostas
