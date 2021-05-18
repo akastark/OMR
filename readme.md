@@ -11,10 +11,10 @@ Abaixo temos os arquivos que este repositório contém.
 ## Pasta código
 
 Esta pasta contém 4 arquivos:
-**codigo/preprocessamento.py** que realiza o pré processamento da imagem (escala de cinza, Canny e Gaussian Blur).
-**codigo/processamento.py**  funções que realizam as manipulações e segmentações de imagem para aplicação do OMR.
-**codigo/calculos_notas.py**  processo que realiza o cálculo da nota com base na comparação com um gabarito.
-**codigo/main.py**  chamadas da funções principais.
+**codigo/preprocessamento.py** que realiza o pré processamento da imagem (escala de cinza, Canny e Gaussian Blur). //
+**codigo/processamento.py**  funções que realizam as manipulações e segmentações de imagem para aplicação do OMR. // 
+**codigo/calculos_notas.py**  processo que realiza o cálculo da nota com base na comparação com um gabarito. //
+**codigo/main.py**  chamadas da funções principais. //
 
 ## folha_respostas.pdf
 
@@ -30,11 +30,6 @@ Artigo descrevendo todo o funcionamento do algoritmo e também um referencial te
 ## apresentacao
 
 Apresentacao em PDF para a disciplina
-
-## Export a file
-
-You can export the current file by clicking **Export to disk** in the menu. You can choose to export the file as plain Markdown, as HTML using a Handlebars template or as a PDF.
-
 
 # Bibliotecas necessárias
 
