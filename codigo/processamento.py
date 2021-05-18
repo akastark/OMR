@@ -7,6 +7,8 @@ import numpy as np
 import preprocessamento as pre
 import processamento as proc
 
+# reordena os pontos dos vertices em ordem crescente do contorno
+
 
 def reordena(pontos):
 
@@ -174,8 +176,14 @@ def geraVetorResposta(imagem):
     contornos, hierarquia = cv2.findContours(
         imagem_processada, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
+    #contorno = imagem.copy()
+
     # procura retangulo
     retangulos = proc.localizaRetangulos(contornos)
+
+    # cv2.drawContours(contorno, contornos, -1, (0, 255, 0), 1)
+    # cv2.imshow("teste", contorno)
+    # cv2.waitKey(0)
 
     retangulo_esquerdo = localizaVertices(retangulos[0])  # questoes 1 a 25
     retangulo_direito = localizaVertices(retangulos[1])  # questoes 26 a 50
@@ -192,5 +200,5 @@ def geraVetorResposta(imagem):
     respostas = processaQuestoes(
         questoes_esquerdo) + processaQuestoes(questoes_direito)
 
-    print(respostas)
+    print("Respostas:", respostas)
     return respostas

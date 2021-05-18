@@ -6,7 +6,7 @@ import calculos_notas as nota
 
 # path do gabarito
 path_gabarito = "imagens/img01.jpg"
-path_aluno = "imagens/img03.jpg"
+path_aluno = "imagens/img04.jpg"
 
 # carrega imagem
 imagem_gabarito = cv2.imread(path_gabarito)
@@ -24,6 +24,6 @@ nota, acertos, erros, corretas, erradas, nulas, duplas = nota.calculaNota(
 print("A nota foi: ", nota)
 print("Você errou", erros, " questões e acertou ", acertos, "questoes")
 print("As questões erradas foram: ", erradas)
-print("As questões corretas foram: ", corretas, "sendo",
+print("As questões corretas foram: ", corretas, "sendo a(s) questão(ões)",
       duplas, "por possuir duas alternativas assinaladas")
 print("A prova teve as seguintes questões anuladas: ", nulas)
