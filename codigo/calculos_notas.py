@@ -25,22 +25,22 @@ def calculaNota(gabarito, respostas):
 
     index = 1
 
-    for questao in gabarito:
+    for i in range(0, 50):
 
         # se a resposta for igual a do gabarito
-        if respostas[questao] == gabarito[questao]:
+        if respostas[i] == gabarito[i]:
             qtd_corretas += 1
             corretas.append(index)
 
-        # se o gabarito nao estiver assinalado naquela questao
-        elif gabarito[questao] == -1:
-            qtd_questoes_validas_gabarito -= 1
-            nulas.append(index)
+        # se o gabarito nao estiver assinalado naquela i
+        elif respostas[i] != gabarito[i]:
+            if gabarito[i] == -1:
+                qtd_questoes_validas_gabarito -= 1
+                nulas.append(index)
 
-        # se as respostas forem diferentes
-        else:
-            qtd_erradas += 1
-            erradas.append(index)
+            else:
+                qtd_erradas += 1
+                erradas.append(index)
 
         index += 1
     # calcula a nota do aluno

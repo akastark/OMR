@@ -6,16 +6,19 @@ import calculos_notas as nota
 
 # path do gabarito
 path_gabarito = "imagens/img01.jpg"
+path_aluno = "imagens/img03.jpg"
 
 # carrega imagem
 imagem_gabarito = cv2.imread(path_gabarito)
+imagem_aluno = cv2.imread(path_aluno)
 
 # processa a imagem e transforma em um vetor
 gabarito = proc.geraVetorResposta(imagem_gabarito)
+aluno = proc.geraVetorResposta(imagem_aluno)
 
 # calcula a nota, numero de acertos, erros, questoes acertadas, questoes erradas e questoes nulas
 nota, acertos, erros, corretas, erradas, nulas = nota.calculaNota(
-    gabarito, gabarito)
+    gabarito, aluno)
 
 
 print("A nota foi: ", nota)
