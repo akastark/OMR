@@ -10,7 +10,7 @@ import processamento as proc
 # reordena os pontos dos vertices em ordem crescente do contorno
 
 
-def reordena(pontos):
+def ordenaPontosVertice(pontos):
 
     pontos = pontos.reshape((4, 2))
 
@@ -136,7 +136,7 @@ def processaRetantagulo(retangulo, imagem_original, largura, altura):
     if retangulo.size != 0:
 
         # reordena os pontos do retangulo
-        retangulo = proc.reordena(retangulo)
+        retangulo = proc.ordenaPontosVertice(retangulo)
 
         # pontos da matriz de transformação para  o retangulo
         pt1 = np.float32(retangulo)
