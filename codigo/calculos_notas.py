@@ -8,6 +8,9 @@
 # caso o aluno nao tenha preenchido, zera a questao
 
 
+from numpy.lib.function_base import append
+
+
 def calculaNota(gabarito, respostas):
 
     if len(gabarito) != len(respostas):
@@ -22,6 +25,7 @@ def calculaNota(gabarito, respostas):
 
     qtd_questoes_validas_gabarito = 50
     nulas = []
+    marcas_duplas = []
 
     index = 1
 
@@ -38,6 +42,14 @@ def calculaNota(gabarito, respostas):
                 qtd_questoes_validas_gabarito -= 1
                 nulas.append(index)
 
+            elif gabarito[i] == -2:
+                qtd_questoes_validas_gabarito -= 1
+                nulas.append(index)
+
+            elif respostas[i] == -2:
+                qtd_erradas += 1
+                marcas_duplas.append(index)
+
             else:
                 qtd_erradas += 1
                 erradas.append(index)
@@ -46,4 +58,4 @@ def calculaNota(gabarito, respostas):
     # calcula a nota do aluno
     nota = (qtd_corretas/qtd_questoes_validas_gabarito) * 100
 
-    return nota, qtd_corretas, qtd_erradas, corretas, erradas, nulas
+    return nota, qtd_corretas, qtd_erradas, corretas, erradas, nulas, marcas_duplas

@@ -17,12 +17,13 @@ gabarito = proc.geraVetorResposta(imagem_gabarito)
 aluno = proc.geraVetorResposta(imagem_aluno)
 
 # calcula a nota, numero de acertos, erros, questoes acertadas, questoes erradas e questoes nulas
-nota, acertos, erros, corretas, erradas, nulas = nota.calculaNota(
+nota, acertos, erros, corretas, erradas, nulas, duplas = nota.calculaNota(
     gabarito, aluno)
 
 
 print("A nota foi: ", nota)
 print("Você errou", erros, " questões e acertou ", acertos, "questoes")
 print("As questões erradas foram: ", erradas)
-print("As questões corretas foram: ", corretas)
+print("As questões corretas foram: ", corretas, "sendo",
+      duplas, "por possuir duas alternativas assinaladas")
 print("A prova teve as seguintes questões anuladas: ", nulas)

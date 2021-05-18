@@ -110,9 +110,15 @@ def processaQuestoes(retangulo):
         limite_minimo = np.amin(aux)*1.5
         if(np.amax(aux) > limite_minimo):
 
-            # print(np.amin(aux))
-            # alternativa assinalada é a alternativa com mais pixels não nulos
             alternativa_assinalada = np.where(aux == np.amax(aux))
+
+            # ordena para localizar a segunda maior
+            aux.sort()
+
+            # compara as duas maiores alternativas, se a segunda maior tiver 80% do valor da proxima
+            # considera como duas questoes assinaladas e anula a questao
+            if((aux[3]/np.amax(aux)) > 0.8):
+                alternativa_assinalada[0][0] = -2
 
         else:
             alternativa_assinalada[0][0] = -1
