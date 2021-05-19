@@ -32,7 +32,7 @@ def calculaNota(gabarito, respostas):
     for i in range(0, 50):
 
         # se a resposta for igual a do gabarito
-        if respostas[i] == gabarito[i]:
+        if respostas[i] == gabarito[i] and gabarito[i] != -1:
             qtd_corretas += 1
             corretas.append(index)
 
